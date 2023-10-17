@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Recipes</title>
+    <link rel="stylesheet" href="stylingsubpage.css" />
+  </head>
+  <body>
+    <div class="banner">
+      <div class="navbar">
+        <img src="logo.png" class="logo" />
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="recipes.html">Recipes</a></li>
+          <li><a href="add_recipes.html">Add Recipes</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <h1
+        style="display: flex;justify-content: center; align-items: center;color: white;padding: 20px;"
+      >
+        Add a Recipe
+      </h1>
+      <form class="form">
+        <div class="inputbox">
+          <label for="recipe-name">Enter your recipe name</label>
+          <input type="text" id="recipe-name" required="required" />
+        </div>
+        <div class="inputbox">
+          <label for="ingredients">List the ingredients of your recipe</label>
+          <input type="text" id="ingredients" required="required" />
+        </div>
+        <div class="inputbox">
+          <label for="procedure">Write the procedure of your recipe</label>
+          <textarea id="procedure" required="required"></textarea>
+        </div>
+        <div class="inputbox">
+          <button type="button" onclick="storeRecipe()">Submit Recipe</button>
+        </div>
+      </form>
+    </div>
+    <script>
+      function storeRecipe() {
+        const recipeName = document.getElementById("recipe-name").value;
+        const ingredients = document.getElementById("ingredients").value;
+        const procedure = document.getElementById("procedure").value;
+
+        // Retrieve existing recipe data from local storage
+        const existingRecipes =
+          JSON.parse(localStorage.getItem("recipes")) || [];
+
+        // Create a new recipe object
+        const newRecipe = {
+          name: recipeName,
+          ingredients: ingredients,
+          procedure: procedure,
+        };
+
+        // Add the new recipe to the existing recipes
+        existingRecipes.push(newRecipe);
+
+        // Store the updated recipes array in local storage
+        localStorage.setItem("recipes", JSON.stringify(existingRecipes));
+
+        alert("Recipe submitted successfully!");
+      }
+    </script>
+  </body>
+</html>

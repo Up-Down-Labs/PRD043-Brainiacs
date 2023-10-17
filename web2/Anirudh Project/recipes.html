@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Explore New Recipes</title>
+  <link rel="stylesheet" href="recipestyling.css">
+</head>
+<body>
+  <div class="banner">
+    <div class="navbar">
+      <img src="logo.png" class="logo">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="recipes.html">Recipes</a></li>
+        <li><a href="Addrecipe.html">Add Recipes</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+
+  <div class="recipe-details">
+    <h1>Explore New Recipes</h1>
+
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Retrieve the array of recipes from local storage
+    const recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+  
+    if (recipes.length > 0) {
+      // Get the recipe-details div where the recipes will be displayed
+      const recipeDetails = document.querySelector(".recipe-details");
+  
+      // Loop through the array and display each recipe
+      recipes.forEach(function (recipe, index) {
+        // Create a container for each recipe and assign a class
+        const recipeContainer = document.createElement("div");
+        recipeContainer.classList.add("recipe-container"); // Add a class
+  
+        // Create elements for recipe name, ingredients, and procedure
+        const recipeName = document.createElement("h2");
+        recipeName.textContent ="Recipe Name:" + recipe.name;
+  
+        const ingredients = document.createElement("p");
+        ingredients.textContent = "Ingredients: " + recipe.ingredients;
+  
+        const procedure = document.createElement("p");
+        procedure.textContent = "Procedure: " + recipe.procedure;
+  
+        // Append recipe details to the recipe container
+        recipeContainer.appendChild(recipeName);
+        recipeContainer.appendChild(ingredients);
+        recipeContainer.appendChild(procedure);
+  
+        // Append the recipe container to the recipe-details div
+        recipeDetails.appendChild(recipeContainer);
+  
+        // Add a line break for better separation between recipes
+        if (index < recipes.length - 1) {
+          const lineBreak = document.createElement("hr");
+          recipeDetails.appendChild(lineBreak);
+        }
+      });
+    } else {
+      alert("No recipes found.");
+    }
+  });
+  </script>
+  
+  
+</body>
+</html>
